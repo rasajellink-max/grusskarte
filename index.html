@@ -15,6 +15,15 @@
 </head>
 <body>
   <div class="card">
+      <div id="lock">
+    <h1>🔒 Kleines Rätsel</h1>
+    <p>Gib den Code ein, um die Nachricht zu öffnen.</p>
+    <input id="pin" inputmode="numeric" placeholder="Code" style="font-size:18px;padding:10px 12px;border-radius:12px;border:1px solid #ddd;width:180px;">
+    <button id="btn" style="font-size:18px;padding:10px 14px;border-radius:12px;border:0;cursor:pointer;">Öffnen</button>
+    <p id="hint" style="opacity:.7;margin-top:10px;"></p>
+  </div>
+
+  <div id="msg" style="display:none;">
     <h1>Liebe Natalya,</h1>
     <p>ich hoffe, dir geht es schon ein bisschen besser.</p>
     <p class="sig">Lieben Gruß<br>Sarah</p>
@@ -27,6 +36,33 @@
 |  \_/  |
  \_____/
     </pre>
+      </div>
   </div>
+  <script>
+  const CODE = "156";
+  const lock = document.getElementById("lock");
+  const msg  = document.getElementById("msg");
+  const pin  = document.getElementById("pin");
+  const hint = document.getElementById("hint");
+  const btn  = document.getElementById("btn");
+
+  hint.textContent = "Hinweis: Rechne deinen Geburtstag mal deinem Geburtsmonat. Es kommt ein dreistelliger Code heraus.";
+
+  function openMsg() {
+    if ((pin.value || "").trim() === CODE) {
+      lock.style.display = "none";
+      msg.style.display = "block";
+      pin.value = "";
+    } else {
+      hint.textContent = "Noch nicht ganz... 🙂 Tipp: Tag × Monat (z.B. 10 × 6).";
+      pin.select();
+    }
+  }
+
+  btn.addEventListener("click", openMsg);
+  pin.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") openMsg();
+  });
+</script>
 </body>
 </html>
