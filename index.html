@@ -52,6 +52,18 @@
     if ((pin.value || "").trim() === CODE) {
       lock.style.display = "none";
       msg.style.display = "block";
+            // Konfetti-Emoji für 1,2 Sekunden
+      const conf = document.createElement("div");
+      conf.textContent = "🎉✨🎉  Tadaa!  🎉✨🎉";
+      conf.style.position = "fixed";
+      conf.style.left = "0";
+      conf.style.right = "0";
+      conf.style.top = "18px";
+      conf.style.textAlign = "center";
+      conf.style.fontSize = "28px";
+      conf.style.zIndex = "9999";
+      document.body.appendChild(conf);
+      setTimeout(() => conf.remove(), 1200);
       pin.value = "";
     } else {
       hint.textContent = "Noch nicht ganz... 🙂 Tipp: Tag × Monat (z.B. 10 × 6).";
